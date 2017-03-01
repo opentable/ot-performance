@@ -1,0 +1,24 @@
+{
+  "name": "ot-performance",
+  "version": "1.0.0",
+  "description": "Project for collecting OpentTable's performance analyses.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opentable/ot-performance.git"
+  },
+  "keywords": [
+    "performance",
+    "analysis",
+    "benchmark"
+  ],
+  "author": "Max Gurewitz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/opentable/ot-performance/issues"
+  },
+  "homepage": "https://github.com/opentable/ot-performance#readme"
+}
