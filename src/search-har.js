@@ -1,8 +1,5 @@
 const harCapturer = require('chrome-har-capturer');
 
-// TODO: make dateTime dynamic
-// TODO: add variable number of requests
-
 function loadTimesByUrl(log) {
   const contentLoadedTimestamps = log.pages.map(p =>
     p.pageTimings.onContentLoad + Date.parse(p.startedDateTime)
@@ -26,14 +23,17 @@ function parseHars(log) {
   return loadTimesByUrl(log);
 }
 
-module.exports = function searchHar(cb) {
+module.exports = function searchHar({pageLoads = 5} = {}, cb) {
   let done = false;
 
-  const capturerInstance =
-    harCapturer.load([
-      'https://www.opentable.com/s/?covers=2&dateTime=2017-04-28%2019%3A00&metroId=4&regionIds=5&enableSimpleCuisines=true&pageType=0',
-      'https://www.opentable.com/s/?covers=2&dateTime=2017-04-28%2019%3A00&metroId=4&regionIds=5&enableSimpleCuisines=true&pageType=0'
-    ]);
+  const urls = [];
+
+  for (let i = 0; i < pageLoads; i++) {
+    // TODO: make dateTime dynamic
+    urls.push('https://www.opentable.com/s/?covers=2&dateTime=2017-04-28%2019%3A00&metroId=4');
+  }
+
+  const capturerInstance = harCapturer.load(urls);
 
   capturerInstance.on('end', hars => {
     const res = parseHars(hars.log);
