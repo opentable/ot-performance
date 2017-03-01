@@ -4,7 +4,9 @@
   "description": "Project for collecting OpentTable's performance analyses.",
   "main": "index.js",
   "scripts": {
-    "search-har": "node bin/search-har.js"
+    "search-har": "node bin/search-har.js",
+    "remote-chrome-mac": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port=9222 --enable-benchmarking --enable-net-benchmarking",
+    "remote-chrome-linux": "google-chrome --remote-debugging-port=9222 --enable-benchmarking --enable-net-benchmarking"
   },
   "repository": {
     "type": "git",

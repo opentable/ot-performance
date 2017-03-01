@@ -13,16 +13,16 @@ The commands required for running chrome with flags are a function of one's oper
 ##### Mac
 
 ```
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --enable-benchmarking --enable-net-benchmarking
+npm run remote-chrome-mac
 ```
 
 ##### Linux
 
 ```
-google-chrome --remote-debugging-port=9222 --enable-benchmarking --enable-net-benchmarking
+npm run remote-chrome-linux
 ```
 
-Now run the script.
+Now with the browser running in the foreground, run the script in another window.
 
 ```
 npm run search-har
