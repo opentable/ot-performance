@@ -24,7 +24,9 @@ function loadTimesByUrl(log) {
 function parseHars(log) {
   return _.pipe(
     loadTimesByUrl,
-    _.mapValues(_.reduce(stats, null))
+    _.mapValues(_.reduce(stats, null)),
+    _.toPairs,
+    _.orderBy(_.get('[1].mean'), 'desc')
   )(log);
 }
 
