@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/opentable/ot-performance/issues"
   },
-  "homepage": "https://github.com/opentable/ot-performance#readme"
+  "homepage": "https://github.com/opentable/ot-performance#readme",
+  "dependencies": {
+    "chrome-har-capturer": "^0.9.3"
+  }
 }
