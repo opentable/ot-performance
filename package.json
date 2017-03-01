@@ -4,7 +4,7 @@
   "description": "Project for collecting OpentTable's performance analyses.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "search-har": "node bin/search-har.js"
   },
   "repository": {
     "type": "git",
