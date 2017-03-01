@@ -2,6 +2,30 @@ const harCapturer = require('chrome-har-capturer');
 
 // TODO: make dateTime dynamic
 // TODO: add variable number of requests
+
+function loadTimesByUrl(log) {
+  const contentLoadedTimestamps = log.pages.map(p =>
+    p.pageTimings.onContentLoad + Date.parse(p.startedDateTime)
+  );
+
+  return log.entries.reduce((memo, entry, i) => {
+    const contentLoadedTimestamp = contentLoadedTimestamps[entry.pageref];
+    const entryLoadedTimestamp = Date.parse(entry.startedDateTime) + entry.time;
+
+    if (entry._initiator.type === 'parser' && entryLoadedTimestamp < contentLoadedTimestamp) {
+      const url = entry.request.url;
+      memo[url] = memo[url] || [];
+      memo[url].push(entry.time);
+    }
+
+    return memo;
+  }, {});
+}
+
+function parseHars(log) {
+  return loadTimesByUrl(log);
+}
+
 module.exports = function searchHar(cb) {
   let done = false;
 
@@ -12,7 +36,7 @@ module.exports = function searchHar(cb) {
     ]);
 
   capturerInstance.on('end', hars => {
-    const res = hars;
+    const res = parseHars(hars.log);
 
     if (!done) {
       done = true;
