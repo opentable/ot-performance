@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/opentable/ot-performance#readme",
   "dependencies": {
-    "chrome-har-capturer": "^0.9.3"
+    "chrome-har-capturer": "^0.9.3",
+    "lodash": "^4.17.4",
+    "statistics": "^3.3.0"
   }
 }
