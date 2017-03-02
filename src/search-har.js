@@ -21,16 +21,29 @@ function loadTimesByUrl(log) {
   }, {});
 }
 
+const statValues = _.mapValues(_.reduce(stats, null));
+
 function parseHars(log) {
-  return _.pipe(
+  const assets = _.pipe(
     loadTimesByUrl,
-    _.mapValues(_.reduce(stats, null)),
+    statValues,
     _.toPairs,
     _.orderBy(_.get('[1].mean'), 'desc')
   )(log);
+
+  const pageLoads = _.pipe(
+    _.reduce((memo, {pageTimings}) => {
+      memo.onContentLoad.push(pageTimings.onContentLoad);
+      memo.onLoad.push(pageTimings.onLoad);
+      return memo;
+    }, { onContentLoad: [], onLoad: [] }),
+    statValues
+  )(log.pages);
+
+  return {assets, pageLoads};
 }
 
-module.exports = function searchHar({pageLoads = 5} = {}, cb) {
+module.exports = function searchHar({pageLoads = 20} = {}, cb) {
   let done = false;
 
   const url = 'https://www.opentable.com/s/?covers=2&dateTime=2017-04-28%2019%3A00&metroId=4';
